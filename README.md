@@ -1,0 +1,1 @@
+This repo will keep my [Front-End Hero II](https://www.felipefialho.com/blog/2016/do-zero-a-heroi-do-front-end-parte-2) projects and notes :)

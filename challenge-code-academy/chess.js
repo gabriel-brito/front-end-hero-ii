@@ -1,50 +1,59 @@
 let userChoise;
+let newChoise;
 let AIChoise = Math.floor(Math.random() * 3 + 1);
+let myButton = document.querySelector("button");
+let mySpan = document.querySelector("span");
+let myTitle = document.querySelector("h2");
 
-function user() {
+function jokenpo() {
+  function AI() {
+    if (AIChoise == 1) AIChoise = "pedra";
+    else if (AIChoise == 2) AIChoise = "tesoura";
+    else AIChoise = "papel";
+  }
+  AI();
+
   userChoise = prompt("Qual sua escolha? Pedra, Papel ou Tesoura?");
-  if (
-    userChoise.toLowerCase() == "pedra" ||
-    userChoise.toLowerCase() == "papel" ||
-    userChoise.toLowerCase() == "tesoura"
-  ) {
-    return userChoise;
+  newChoise = userChoise.toLowerCase();
+  if (newChoise == "pedra" || newChoise == "papel" || newChoise == "tesoura") {
+    return newChoise;
   } else if (
-    userChoise !== "pedra" ||
-    userChoise !== "papel" ||
-    userChoise !== "tesoura"
+    newChoise !== "pedra" ||
+    newChoise !== "papel" ||
+    newChoise !== "tesoura"
   ) {
     alert("Digite corretamente, por favor.");
-    user();
+    jokenpo();
   }
 }
-user();
-
-function AI() {
-  if (AIChoise == 1) AIChoise = "pedra";
-  else if (AIChoise == 2) AIChoise = "tesoura";
-  else AIChoise = "papel";
-}
-AI();
 
 function battle() {
   if (
-    (userChoise == "papel" && AIChoise == "papel") ||
-    (userChoise == "pedra" && AIChoise == "pedra") ||
-    (userChoise == "tesoura" && AIChoise == "tesoura")
+    (newChoise == "papel" && AIChoise == "papel") ||
+    (newChoise == "pedra" && AIChoise == "pedra") ||
+    (newChoise == "tesoura" && AIChoise == "tesoura")
   ) {
-    alert("Empate!");
+    mySpan.textContent = "Empate!";
   } else if (
-    (userChoise == "papel" && AIChoise == "pedra") ||
-    (userChoise == "tesoura" && AIChoise == "papel") ||
-    (userChoise == "pedra" && AIChoise == "tesoura")
+    (newChoise == "papel" && AIChoise == "pedra") ||
+    (newChoise == "tesoura" && AIChoise == "papel") ||
+    (newChoise == "pedra" && AIChoise == "tesoura")
   ) {
-    alert("Vitória!!!");
+    mySpan.textContent = "Vitória!!!";
   } else {
-    alert("Derrota!");
+    mySpan.textContent = "Derrota!";
   }
 }
-battle();
 
-console.log(`Escolha do adversário: ${AIChoise}`);
-console.log(`Sua escolha: ${userChoise}`);
+myButton.onclick = function() {
+  let hasUsed = true;
+  jokenpo();
+  if (hasUsed) {
+    battle();
+    setTimeout(() => {
+      if (mySpan.textContent != "") {
+        mySpan.textContent = "Clique e jogue novamente!";
+      }
+    }, 5000);
+  }
+};
